@@ -72,32 +72,88 @@
     .footer { margin-top:82px; padding:30px 0 44px; border-top:1px solid var(--line); color:var(--sub); font-size:13px; }
     @media (max-width:800px) { .cards,.kpis,.split { grid-template-columns:1fr; } .flow { grid-template-columns:1fr; } .flow i { transform:rotate(90deg); justify-self:center; line-height:12px; } .affils { display:block; } .affils span { display:block; } .affils span + span::before { content:none; } }
     @media (max-width:580px) { .shell { width:min(100% - 28px,1120px); } .hero { padding-bottom:57px; } .intro { padding-top:45px; } .nav { align-items:flex-start; } .navlinks { gap:8px 13px; justify-content:flex-end; } .video-head,.video-foot { padding:12px 14px; } main section { padding-top:56px; } .bar-row { grid-template-columns:118px 1fr 45px; gap:8px; font-size:12px; } }
+
+    :root { color-scheme:light; }
+    body.dark { --ink:#e6f4f3; --sub:#acbec3; --line:#314c55; --paper:#0b1722; --white:#122532; --teal:#70dfce; --teal-light:#173b42; }
+    body.dark .lede { color:#bed0d4; }
+    body.dark th { background:#19343e; color:#d1e3e5; }
+    body.dark .flow div,body.dark .interactive-figure,body.dark .explorer { background:#12313a; }
+    body.dark .track { background:#29434d; }
+    body.dark tr.highlight { background:#17413f; color:#a6f5de; }
+    .navlinks { align-items:center; }
+    .nav button { border:1px solid #709e9f; color:#ecfbfa; border-radius:999px; background:#ffffff18; padding:7px 12px; cursor:pointer; }
+    .nav button:hover { background:#ffffff32; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:25px; }
+    .hero-actions a,.hero-actions span { border-radius:999px; padding:8px 15px; border:1px solid #86b5b7; color:#e5f7f3; font-size:13px; font-weight:700; text-decoration:none; }
+    .hero-actions a { background:#e1f9f0; color:#12494c; border-color:transparent; }
+    .video-placeholder { position:relative; margin:-34px auto 0; min-height:260px; display:grid; place-items:center; overflow:hidden; padding:38px; border-radius:20px; border:1px solid #355962; background:radial-gradient(circle at 25% 60%,#174b53 0,transparent 36%),radial-gradient(circle at 80% 25%,#214254 0,transparent 40%),#0c1725; color:#fff; text-align:center; box-shadow:0 28px 70px rgba(10,29,47,.2); }
+    .video-placeholder::before { content:""; position:absolute; inset:18px; border:1px dashed #5d8588; border-radius:12px; pointer-events:none; }
+    .video-placeholder > div { position:relative; max-width:550px; }
+    .play-mark { display:inline-grid; place-items:center; width:62px; height:62px; margin-bottom:14px; border:1px solid #9ad6ce; border-radius:50%; color:#a3e8dc; font-size:27px; padding-left:4px; }
+    .video-placeholder h2 { margin:0 0 8px; font-size:clamp(23px,3vw,34px); }
+    .video-placeholder p { color:#bed3d4; margin:0; }
+    .abstract-box { border-left:4px solid var(--teal); padding:12px 22px; background:var(--white); border-radius:0 13px 13px 0; max-width:950px; }
+    .abstract-box p { margin:0; }
+    .interactive-figure,.explorer { background:#fff; border:1px solid var(--line); border-radius:17px; padding:24px; margin-top:23px; }
+    .interactive-figure figcaption { color:var(--sub); font-size:13px; margin-top:14px; }
+    .figure-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:19px 0; }
+    .figure-step { background:var(--teal-light); border:1px solid #acd6d0; border-radius:12px; padding:17px; min-height:110px; color:var(--ink); text-align:left; cursor:pointer; font:inherit; }
+    .figure-step strong { display:block; margin-bottom:6px; color:var(--teal); }
+    .figure-step[aria-pressed="true"] { box-shadow:0 0 0 2px var(--teal); }
+    .figure-detail { border-radius:12px; background:var(--teal-light); padding:17px 20px; min-height:85px; }
+    .figure-detail strong { color:var(--teal); }
+    .figure-detail p { margin:3px 0 0; }
+    .control-row { display:flex; flex-wrap:wrap; gap:8px; margin:15px 0 20px; }
+    .control-row button { font:inherit; font-size:14px; padding:7px 12px; border-radius:999px; cursor:pointer; background:var(--white); color:var(--ink); border:1px solid var(--line); }
+    .control-row button[aria-pressed="true"] { background:var(--teal); border-color:var(--teal); color:#fff; }
+    .compare { display:grid; gap:11px; }
+    .compare-row { display:grid; grid-template-columns:160px 1fr 62px; align-items:center; gap:12px; font-size:14px; }
+    .compare-row .track { height:16px; }
+    .compare-row .fill { transition:width .35s ease; }
+    .compare-row:nth-child(1) .fill { background:#7893a2; }
+    .compare-row:nth-child(2) .fill { background:#92bbad; }
+    .compare-row b { text-align:right; }
+    .explorer > p { font-size:14px; color:var(--sub); }
+    details { background:var(--white); border:1px solid var(--line); border-radius:13px; padding:15px 20px; margin-top:10px; }
+    details summary { cursor:pointer; font-weight:750; }
+    details p { color:var(--sub); padding-top:12px; margin-bottom:0; }
+    .reference-list { line-height:1.75; padding-left:23px; }
+    .reference-list li { padding:4px 0; }
+    .skip { position:absolute; left:-10000px; top:auto; }
+    .skip:focus { left:10px; top:10px; background:#fff; color:#000; z-index:20; padding:8px; }
+    :focus-visible { outline:3px solid #e3b355; outline-offset:3px; }
+    @media(max-width:720px) { .nav { display:grid; grid-template-columns:1fr auto; align-items:center; } .navlinks { grid-column:1 / -1; grid-row:2; justify-content:flex-start; } .nav button { grid-column:2; grid-row:1; } }
+    @media(max-width:700px) { .figure-grid { grid-template-columns:1fr; } .compare-row { grid-template-columns:105px 1fr 50px; font-size:12px; gap:7px; } .video-placeholder { min-height:240px; padding:30px; } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
+
   </style>
 </head>
 <body>
+  <a class="skip" href="#abstract">Skip to content</a>
   <header class="hero">
     <div class="shell">
       <nav class="nav" aria-label="Main navigation">
         <a class="mark" href="#top">CAPABLE</a>
-        <div class="navlinks"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#hardware">Real robot</a></div>
+        <div class="navlinks"><a href="#abstract">Abstract</a><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#hardware">Real robot</a></div>
+      <button type="button" id="theme-toggle" aria-label="Toggle color theme">Dark mode</button>
       </nav>
       <div id="top" class="intro">
         <p class="eyebrow">Robot manipulation · Vision-language-action · Fault recovery</p>
         <h1>CAPABLE: Capability-Aware Policy Adaptation via Behavioral Latent Encoding</h1>
         <p class="subtitle">When a robot joint stops responding as expected, CAPABLE uses execution feedback to adapt a frozen vision-language-action policy—without fault labels or fault-specific demonstrations.</p>
         <div class="affils" aria-label="Affiliations"><span>University of Bremen</span><span>University of North Texas</span><span>Toyota Motor North America</span></div>
+        <div class="hero-actions"><a href="#results">Explore results</a><a href="https://github.com/capable-vla/capable-vla">GitHub</a><span>Code coming soon</span><span>Checkpoints coming soon</span></div>
       </div>
     </div>
   </header>
 
   <div class="shell">
-    <section class="video-feature" aria-label="Research presentation video">
-      <div class="video-head"><strong>CAPABLE research presentation</strong><span>System overview · Method · Experiments</span></div>
-      <video controls playsinline preload="metadata" aria-label="CAPABLE research presentation"><source src="CAPABLE-SupVideo.mp4" type="video/mp4">Your browser does not support MP4 video.</video>
-      <div class="video-foot"><a href="CAPABLE-SupVideo.mp4" download>Download presentation video</a></div>
+    <section class="video-placeholder" aria-label="Presentation video placeholder">
+      <div><span class="play-mark" aria-hidden="true">▶</span><h2>Presentation video coming soon</h2><p>The research presentation will appear here when released.</p></div>
     </section>
 
     <main>
+      <section id="abstract"><p class="section-label">Paper abstract</p><h2>At a glance</h2><div class="abstract-box"><p>Vision-language-action (VLA) policies are trained on a particular robot embodiment and may fail when an actuator no longer realizes the motion that the policy commands. We present CAPABLE, a capability-aware residual reinforcement-learning method that adapts a frozen VLA to impaired actuation without fault labels, affected-joint identifiers, or fault-specific demonstrations. It represents physical capability through each joint’s observed command–response history, grounds the estimate in the live Jacobian, and combines the joint representations using shared temporal encoding and cross-joint self-attention. Self-supervised physical prediction shapes the resulting latent, which conditions a bounded residual action. On 28 LIBERO tasks, CAPABLE increases success under a globally unseen joint lock from 24.8% to 59.3%, compared with 41.9% for a parameter-matched global-history residual baseline, while largely retaining healthy performance. The advantage extends across six independently held-out actuators and to a physical Franka Panda under software-enforced joint locks, where CAPABLE reaches 24/30 successful trials versus 13/30 for the matched baseline.</p></div></section>
       <section id="overview">
         <p class="section-label">The problem</p>
         <h2>The task is understood. The body has changed.</h2>
@@ -119,12 +175,22 @@
           <article class="card"><span class="num">03</span><h3>Residual reinforcement learning</h3><p>Self-supervised motion prediction shapes the latent, which conditions a SAC residual actor. The bounded correction is added to the frozen VLA's nominal arm action.</p></article>
         </div>
         <div class="flow" aria-label="CAPABLE inference flow"><div>Frozen VLA action<br><small>image + language</small></div><i aria-hidden="true">➜</i><div>Joint feedback + Jacobian<br><small>capability latent</small></div><i aria-hidden="true">➜</i><div>Bounded SAC correction<br><small>closed-loop execution</small></div></div>
+      <figure class="interactive-figure" aria-label="Interactive conceptual method figure">
+      <h3>Interactive method figure</h3><p>Choose a stage to inspect what the controller does.</p>
+      <div class="figure-grid"><button type="button" class="figure-step" data-step="0" aria-pressed="true"><strong>01 · Observe mismatch</strong><span>The frozen OpenVLA-OFT policy proposes the nominal action; a 16-step history records commanded and realized motion for each joint.</span></button><button type="button" class="figure-step" data-step="1" aria-pressed="false"><strong>02 · Infer capability</strong><span>A shared temporal encoder and live Jacobian create joint representations; cross-joint attention produces the capability latent.</span></button><button type="button" class="figure-step" data-step="2" aria-pressed="false"><strong>03 · Correct action</strong><span>The latent conditions a bounded SAC residual for six arm dimensions.</span></button></div>
+      <div class="figure-detail" id="figure-detail" aria-live="polite"><strong>Observe mismatch</strong><p>The frozen OpenVLA-OFT policy proposes the nominal action; a 16-step history records commanded and realized motion for each joint.</p></div>
+      <figcaption>Conceptual diagram reconstructed from the method description. The original paper figure is not reproduced here.</figcaption>
+    </figure><script type="application/json" id="figure-data">{"0": {"title": "Observe mismatch", "description": "The frozen OpenVLA-OFT policy proposes the nominal action; a 16-step history records commanded and realized motion for each joint."}, "1": {"title": "Infer capability", "description": "A shared temporal encoder and live Jacobian create joint representations; cross-joint attention produces the capability latent."}, "2": {"title": "Correct action", "description": "The latent conditions a bounded SAC residual for six arm dimensions. The frozen VLA gripper command passes through unchanged."}}</script>
       </section>
 
       <section id="results">
         <p class="section-label">Simulation results</p>
         <h2>Recovery transfers to an actuator unseen in training</h2>
         <p class="lede">The main evaluation spans 28 LIBERO tasks and three training seeds. Failures on joint j₂ are excluded from training, task selection, and checkpoint selection. Success is task-balanced; ± denotes standard deviation across seeds where reported.</p>
+        <div class="explorer"><h3>Explore actuation conditions</h3><p>Switch conditions to compare the frozen VLA, matched global-history residual controller, and CAPABLE. The cross-fault tests reuse lock-trained checkpoints without retraining.</p>
+       <div class="control-row" aria-label="Results condition"><button type="button" data-view="Healthy" aria-pressed="false">Healthy</button><button type="button" data-view="Seen locks" aria-pressed="false">Seen locks</button><button type="button" data-view="Unseen j₂" aria-pressed="false">Unseen j₂</button><button type="button" data-view="Damping" aria-pressed="false">Damping</button><button type="button" data-view="Friction" aria-pressed="false">Friction</button><button type="button" data-view="Partial" aria-pressed="false">Partial</button><button type="button" data-view="Range" aria-pressed="false">Range</button><button type="button" data-view="Late lock" aria-pressed="false">Late lock</button></div>
+       <p id="compare-caption" aria-live="polite"></p><div id="compare-chart" class="compare" role="group" aria-label="Success rates by method"></div></div>
+       <script type="application/json" id="explorer-data">{"Healthy": {"caption": "Healthy operation across 28 LIBERO tasks; success (%).", "values": [["Base VLA", 91.4], ["Global-history SAC", 88.1], ["CAPABLE", 90.8]]}, "Seen locks": {"caption": "Locks on training joints across 28 LIBERO tasks; success (%).", "values": [["Base VLA", 41.6], ["Global-history SAC", 73.8], ["CAPABLE", 86.7]]}, "Unseen j₂": {"caption": "Globally unseen j₂ lock across 28 LIBERO tasks; success (%).", "values": [["Base VLA", 24.8], ["Global-history SAC", 41.9], ["CAPABLE", 59.3]]}, "Damping": {"caption": "Unseen j₂, viscous damping across three severities; success (%).", "values": [["Base VLA", 45.8], ["Global-history SAC", 55.6], ["CAPABLE", 67.8]]}, "Friction": {"caption": "Unseen j₂, Coulomb friction across three severities; success (%).", "values": [["Base VLA", 40.6], ["Global-history SAC", 51.8], ["CAPABLE", 64.2]]}, "Partial": {"caption": "Unseen j₂, partial actuator effectiveness across three severities; success (%).", "values": [["Base VLA", 44.2], ["Global-history SAC", 64.1], ["CAPABLE", 62.3]]}, "Range": {"caption": "Unseen j₂, restricted joint range across three severities; success (%).", "values": [["Base VLA", 32.7], ["Global-history SAC", 54.7], ["CAPABLE", 48.2]]}, "Late lock": {"caption": "Unseen j₂, late-onset joint lock across three onset settings; success (%).", "values": [["Base VLA", 50.4], ["Global-history SAC", 61.5], ["CAPABLE", 72.4]]}}</script>
         <div class="panel">
           <h3>Main 28-task success</h3>
           <p>Success (%) in healthy conditions, trained joint locks, and the globally unseen j₂ lock.</p>
@@ -170,9 +236,55 @@
           <tr class="highlight"><td>Overall</td><td>—</td><td>13/30 (43.3%)</td><td>24/30 (80.0%)</td></tr>
         </tbody></table></div></div>
       </section>
+<section id="details"><p class="section-label">Research details</p><h2>Protocol and references</h2>
+      <details><summary>Evaluation protocol</summary><p>The main pool contains 28 LIBERO tasks, with faults on j₀, j₄, j₅, and j₆ during training. Joint j₂ is excluded from every training stage and task selection. Three seeds train for 1.4 million environment steps each. The six held-out-joint rows use a separate common eight-task subset. Physical joint locks are software enforced at the reference layer.</p></details>
+      <details><summary>Selected references</summary><ol class="reference-list"><li><a href="https://arxiv.org/abs/2306.03310" target="_blank" rel="noopener noreferrer">LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning</a></li><li><a href="https://arxiv.org/abs/2502.19645" target="_blank" rel="noopener noreferrer">Fine-Tuning Vision-Language-Action Models: Optimizing Speed and Success (OpenVLA-OFT)</a></li></ol></details>
+      <details><summary>Availability</summary><p>Code and checkpoints will be released soon. The presentation video placeholder will be replaced when the video is released.</p></details>
+    </section>
     </main>
 
     <footer class="footer">CAPABLE · University of Bremen · University of North Texas · Toyota Motor North America</footer>
   </div>
+
+<script>
+(() => {
+  const body=document.body, toggle=document.querySelector('#theme-toggle');
+  const saved=localStorage.getItem('paper-site-theme');
+  if(saved==='dark') body.classList.add('dark');
+  const setLabel=()=>{toggle.textContent=body.classList.contains('dark')?'Light mode':'Dark mode';};
+  setLabel();
+  toggle.addEventListener('click',()=>{body.classList.toggle('dark');localStorage.setItem('paper-site-theme',body.classList.contains('dark')?'dark':'light');setLabel();});
+
+  const details=JSON.parse(document.querySelector('#figure-data').textContent);
+  const detailBox=document.querySelector('#figure-detail');
+  document.querySelectorAll('.figure-step').forEach(button=>button.addEventListener('click',()=>{
+    document.querySelectorAll('.figure-step').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    const item=details[button.dataset.step];
+    detailBox.querySelector('strong').textContent=item.title;
+    detailBox.querySelector('p').textContent=item.description;
+  }));
+
+  const samples=JSON.parse(document.querySelector('#explorer-data').textContent);
+  const chart=document.querySelector('#compare-chart'), caption=document.querySelector('#compare-caption');
+  function show(key){
+    const sample=samples[key];
+    document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===key)));
+    caption.textContent=sample.caption;
+    chart.replaceChildren();
+    sample.values.forEach(([label,value])=>{
+      const row=document.createElement('div');row.className='compare-row';
+      const name=document.createElement('span');name.textContent=label;
+      const track=document.createElement('div');track.className='track';
+      const bar=document.createElement('span');bar.className='fill';bar.style.width=`${Math.max(0,Math.min(100,value))}%`;
+      track.append(bar);
+      const count=document.createElement('b');count.textContent=`${value.toFixed(1)}%`;
+      row.append(name,track,count);chart.append(row);
+    });
+  }
+  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.view)));
+  show(Object.keys(samples)[0]);
+})();
+</script>
+
 </body>
 </html>
