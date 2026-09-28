@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2a">
+  <meta name="description" content="CAPABLE adapts a frozen vision-language-action policy to impaired robot actuation through capability-aware residual reinforcement learning.">
+  <title>CAPABLE | Capability-Aware Policy Adaptation</title>
+  <style>
+    :root { --ink:#142238; --sub:#516075; --line:#dce5eb; --paper:#f5f8f8; --white:#fff; --navy:#101a2a; --teal:#087e80; --teal-light:#e8f6f3; --gold:#d2a85a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    a { color:var(--teal); }
+    .shell { width:min(1120px,calc(100% - 40px)); margin:auto; }
+    .hero { color:#fff; background:radial-gradient(circle at 86% 12%,#1a565d 0,transparent 36%),linear-gradient(145deg,#101a2a,#14263b 68%,#123e45); padding:24px 0 64px; }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:20px; font-size:14px; }
+    .mark { font-weight:900; font-size:21px; letter-spacing:.1em; color:#fff; text-decoration:none; }
+    .navlinks { display:flex; flex-wrap:wrap; gap:20px; }
+    .navlinks a { color:#dceceb; text-decoration:none; }
+    .navlinks a:hover { color:#fff; text-decoration:underline; }
+    .intro { max-width:930px; padding-top:70px; }
+    .eyebrow { margin:0 0 14px; color:#9ce4d9; font-size:13px; letter-spacing:.17em; font-weight:800; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(34px,5.5vw,65px); line-height:1.1; letter-spacing:-.04em; }
+    .subtitle { margin:20px 0 0; max-width:840px; color:#d9e5e8; font-size:clamp(17px,2.2vw,22px); line-height:1.5; }
+    .affils { margin:26px 0 0; display:flex; flex-wrap:wrap; gap:7px 18px; color:#b6d6d5; font-size:14px; }
+    .affils span + span::before { content:"•"; color:var(--gold); margin-right:18px; }
+    .video-feature { position:relative; margin:-34px auto 0; background:#0c1725; border:1px solid #29434e; border-radius:20px; overflow:hidden; box-shadow:0 28px 70px rgba(10,29,47,.2); }
+    .video-head { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline; padding:16px 22px; background:#112335; color:#fff; }
+    .video-head strong { font-size:18px; }
+    .video-head span { color:#aac6c7; font-size:13px; }
+    .video-feature video { display:block; width:100%; aspect-ratio:16/9; background:#0c1725; }
+    .video-foot { padding:12px 22px; color:#b9d5d7; font-size:13px; background:#112335; }
+    .video-foot a { color:#9de8dc; }
+    main section { padding:74px 0 0; scroll-margin-top:20px; }
+    .section-label { margin:0 0 8px; text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:900; color:var(--teal); }
+    h2 { font-size:clamp(27px,3.3vw,40px); line-height:1.18; letter-spacing:-.03em; margin:0 0 17px; }
+    h3 { line-height:1.26; margin:0 0 9px; font-size:19px; }
+    p { margin:0 0 15px; }
+    .lede { max-width:880px; font-size:18px; color:#34475a; }
+    .kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px; }
+    .kpi,.card,.panel { background:var(--white); border:1px solid var(--line); border-radius:16px; }
+    .kpi { padding:23px; }
+    .kpi b { display:block; font-size:clamp(30px,3.7vw,43px); line-height:1.12; color:var(--teal); letter-spacing:-.045em; }
+    .kpi span { display:block; margin-top:10px; font-size:14px; color:var(--sub); }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:25px; }
+    .card { padding:23px; }
+    .card .num { display:inline-grid; place-items:center; width:33px; height:33px; border-radius:10px; background:var(--teal-light); color:var(--teal); font-weight:800; margin-bottom:18px; }
+    .card p { color:var(--sub); font-size:15px; margin-bottom:0; }
+    .flow { margin-top:22px; display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:12px; }
+    .flow div { padding:16px; text-align:center; border:1px solid #acd6d0; border-radius:12px; background:#eef8f6; font-weight:700; font-size:14px; }
+    .flow i { align-self:center; color:var(--teal); font-style:normal; font-size:24px; }
+    .panel { padding:24px; margin-top:22px; }
+    .panel h3 { margin-bottom:6px; }
+    .panel > p { color:var(--sub); font-size:14px; }
+    .table-scroll { overflow-x:auto; margin-top:16px; }
+    table { width:100%; border-collapse:collapse; font-size:14px; min-width:580px; }
+    th,td { padding:11px 12px; text-align:right; border-bottom:1px solid var(--line); white-space:nowrap; }
+    th:first-child,td:first-child { text-align:left; font-weight:600; }
+    th { color:#385061; background:#f3f8f8; font-size:12px; letter-spacing:.02em; }
+    tbody tr:last-child td { border-bottom:0; }
+    tr.highlight { background:#e9f6f2; color:#075f62; font-weight:800; }
+    .note { margin-top:12px; font-size:13px; color:var(--sub); }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .bars { margin-top:20px; display:grid; gap:17px; }
+    .bar-row { display:grid; grid-template-columns:175px 1fr 55px; align-items:center; gap:12px; font-size:14px; }
+    .track { background:#e6edef; border-radius:999px; height:12px; overflow:hidden; }
+    .fill { display:block; height:100%; background:var(--teal); border-radius:999px; }
+    .bar-row:first-child .fill { background:#7992a4; }
+    .bar-row:nth-child(2) .fill { background:#92bbad; }
+    .bar-row b { text-align:right; }
+    .footer { margin-top:82px; padding:30px 0 44px; border-top:1px solid var(--line); color:var(--sub); font-size:13px; }
+    @media (max-width:800px) { .cards,.kpis,.split { grid-template-columns:1fr; } .flow { grid-template-columns:1fr; } .flow i { transform:rotate(90deg); justify-self:center; line-height:12px; } .affils { display:block; } .affils span { display:block; } .affils span + span::before { content:none; } }
+    @media (max-width:580px) { .shell { width:min(100% - 28px,1120px); } .hero { padding-bottom:57px; } .intro { padding-top:45px; } .nav { align-items:flex-start; } .navlinks { gap:8px 13px; justify-content:flex-end; } .video-head,.video-foot { padding:12px 14px; } main section { padding-top:56px; } .bar-row { grid-template-columns:118px 1fr 45px; gap:8px; font-size:12px; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="shell">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="mark" href="#top">CAPABLE</a>
+        <div class="navlinks"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#hardware">Real robot</a></div>
+      </nav>
+      <div id="top" class="intro">
+        <p class="eyebrow">Robot manipulation · Vision-language-action · Fault recovery</p>
+        <h1>CAPABLE: Capability-Aware Policy Adaptation via Behavioral Latent Encoding</h1>
+        <p class="subtitle">When a robot joint stops responding as expected, CAPABLE uses execution feedback to adapt a frozen vision-language-action policy—without fault labels or fault-specific demonstrations.</p>
+        <div class="affils" aria-label="Affiliations"><span>University of Bremen</span><span>University of North Texas</span><span>Toyota Motor North America</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <section class="video-feature" aria-label="Research presentation video">
+      <div class="video-head"><strong>CAPABLE research presentation</strong><span>System overview · Method · Experiments</span></div>
+      <video controls playsinline preload="metadata" aria-label="CAPABLE research presentation"><source src="CAPABLE-SupVideo.mp4" type="video/mp4">Your browser does not support MP4 video.</video>
+      <div class="video-foot"><a href="CAPABLE-SupVideo.mp4" download>Download presentation video</a></div>
+    </section>
+
+    <main>
+      <section id="overview">
+        <p class="section-label">The problem</p>
+        <h2>The task is understood. The body has changed.</h2>
+        <p class="lede">A vision-language-action policy can choose a sensible action yet fail when an actuator cannot produce the commanded motion. CAPABLE estimates the robot's current physical capability from what each joint was told to do and how it actually moved, then corrects the frozen policy's arm action.</p>
+        <div class="kpis">
+          <div class="kpi"><b>59.3%</b><span>success on a globally unseen joint lock across 28 LIBERO tasks, versus 24.8% for the frozen VLA</span></div>
+          <div class="kpi"><b>+17.4</b><span>percentage points over a parameter-matched global-history SAC residual baseline on the unseen joint</span></div>
+          <div class="kpi"><b>24/30</b><span>successful physical Franka trials with software-enforced joint locks, versus 13/30 for the matched baseline</span></div>
+        </div>
+      </section>
+
+      <section id="method">
+        <p class="section-label">The approach</p>
+        <h2>Learn what each joint can do, then adjust the action</h2>
+        <p class="lede">CAPABLE adds a bounded residual controller to a frozen OpenVLA-OFT policy. It corrects the six arm action dimensions while preserving the VLA's gripper command. The capability representation is updated from observed execution at every control step.</p>
+        <div class="cards">
+          <article class="card"><span class="num">01</span><h3>Command–response history</h3><p>A shared temporal encoder processes a 16-step history for each of the robot's seven joints. It compares commands with realized joint and end-effector motion without learned joint identities.</p></article>
+          <article class="card"><span class="num">02</span><h3>Physically grounded capability</h3><p>The live Jacobian grounds each joint's history in its current contribution to end-effector motion. Cross-joint attention combines the seven representations into one capability latent.</p></article>
+          <article class="card"><span class="num">03</span><h3>Residual reinforcement learning</h3><p>Self-supervised motion prediction shapes the latent, which conditions a SAC residual actor. The bounded correction is added to the frozen VLA's nominal arm action.</p></article>
+        </div>
+        <div class="flow" aria-label="CAPABLE inference flow"><div>Frozen VLA action<br><small>image + language</small></div><i aria-hidden="true">➜</i><div>Joint feedback + Jacobian<br><small>capability latent</small></div><i aria-hidden="true">➜</i><div>Bounded SAC correction<br><small>closed-loop execution</small></div></div>
+      </section>
+
+      <section id="results">
+        <p class="section-label">Simulation results</p>
+        <h2>Recovery transfers to an actuator unseen in training</h2>
+        <p class="lede">The main evaluation spans 28 LIBERO tasks and three training seeds. Failures on joint j₂ are excluded from training, task selection, and checkpoint selection. Success is task-balanced; ± denotes standard deviation across seeds where reported.</p>
+        <div class="panel">
+          <h3>Main 28-task success</h3>
+          <p>Success (%) in healthy conditions, trained joint locks, and the globally unseen j₂ lock.</p>
+          <div class="table-scroll"><table><thead><tr><th>Method</th><th>Healthy</th><th>Seen locks</th><th>Unseen j₂</th><th>Gain vs. base on j₂</th></tr></thead><tbody>
+            <tr><td>Base VLA</td><td>91.4</td><td>41.6</td><td>24.8</td><td>—</td></tr>
+            <tr><td>POMDP-RL</td><td>19.6 ± 2.4</td><td>11.3 ± 2.1</td><td>10.1 ± 1.9</td><td>−14.7</td></tr>
+            <tr><td>Classical RR</td><td>81.6</td><td>61.3</td><td>32.9</td><td>+8.1</td></tr>
+            <tr><td>DEFT (privileged)</td><td>89.7 ± 1.4</td><td>70.1 ± 2.3</td><td>62.8 ± 2.9</td><td>+38.0</td></tr>
+            <tr><td>Global-history SAC</td><td>88.1 ± 1.3</td><td>73.8 ± 2.1</td><td>41.9 ± 3.2</td><td>+17.1</td></tr>
+            <tr class="highlight"><td>CAPABLE</td><td>90.8 ± 1.0</td><td>86.7 ± 1.8</td><td>59.3 ± 3.0</td><td>+34.5</td></tr>
+          </tbody></table></div>
+          <p class="note">Global-history SAC is the controlled comparison: the same frozen VLA, residual action, history, auxiliary targets, optimization, and training budget with matched parameter count. DEFT receives privileged actuator availability and simulator-derived goals.</p>
+        </div>
+        <div class="panel"><h3>Advantage over the matched baseline</h3><p>Success on the globally unseen j₂ lock.</p><div class="bars" role="img" aria-label="Base VLA 24.8 percent, global-history SAC 41.9 percent, CAPABLE 59.3 percent">
+          <div class="bar-row"><span>Base VLA</span><div class="track"><span class="fill" style="width:24.8%"></span></div><b>24.8%</b></div>
+          <div class="bar-row"><span>Global-history SAC</span><div class="track"><span class="fill" style="width:41.9%"></span></div><b>41.9%</b></div>
+          <div class="bar-row"><span>CAPABLE</span><div class="track"><span class="fill" style="width:59.3%"></span></div><b>59.3%</b></div>
+        </div></div>
+        <div class="split">
+          <div class="panel"><h3>Across held-out actuators</h3><p>In six separately trained leave-one-actuator-out splits on a common eight-task subset, CAPABLE exceeds Global-history SAC on every held-out joint. Mean success is <strong>67.0%</strong> versus <strong>42.4%</strong>. This eight-task test is separate from the main 28-task result.</p></div>
+          <div class="panel"><h3>Across fault types</h3><p>Training uses persistent locks only. On unseen j₂, CAPABLE exceeds the matched baseline by <strong>+12.2 points</strong> under damping, <strong>+12.4</strong> under friction, and <strong>+10.9</strong> under a late-onset lock. The matched baseline leads by 1.8 points under partial effectiveness and 6.5 under range restriction.</p></div>
+        </div>
+        <div class="panel"><h3>Zero-shot cross-fault success on unseen j₂</h3><p>Success (%). Non-lock conditions average three severity or onset settings as specified in the study.</p>
+          <div class="table-scroll"><table><thead><tr><th>Fault family</th><th>Base VLA</th><th>Global-history SAC</th><th>CAPABLE</th><th>CAPABLE − Global</th></tr></thead><tbody>
+            <tr><td>Persistent lock</td><td>24.8</td><td>41.9 ± 3.2</td><td>59.3 ± 3.0</td><td>+17.4</td></tr>
+            <tr><td>Damping</td><td>45.8</td><td>55.6 ± 1.4</td><td>67.8 ± 2.9</td><td>+12.2</td></tr>
+            <tr><td>Friction</td><td>40.6</td><td>51.8 ± 1.6</td><td>64.2 ± 3.2</td><td>+12.4</td></tr>
+            <tr><td>Partial effectiveness</td><td>44.2</td><td>64.1 ± 3.3</td><td>62.3 ± 3.0</td><td>−1.8</td></tr>
+            <tr><td>Range restriction</td><td>32.7</td><td>54.7 ± 2.8</td><td>48.2 ± 3.5</td><td>−6.5</td></tr>
+            <tr><td>Late-onset lock</td><td>50.4</td><td>61.5 ± 3.1</td><td>72.4 ± 2.7</td><td>+10.9</td></tr>
+          </tbody></table></div>
+        </div>
+      </section>
+
+      <section id="hardware">
+        <p class="section-label">Physical evaluation</p>
+        <h2>Recovery on a Franka Panda</h2>
+        <p class="lede">CAPABLE and the matched baseline are transferred from a digital twin to a physical Franka Panda without hardware RL. Joint locks are software enforced at the joint-reference layer. Each task and joint condition uses ten trials per method.</p>
+        <div class="panel"><h3>Physical robot success</h3><div class="table-scroll"><table><thead><tr><th>Task</th><th>Joint</th><th>Global-history SAC</th><th>CAPABLE</th></tr></thead><tbody>
+          <tr><td>Open drawer</td><td>j₀ (seen)</td><td>5/10</td><td>9/10</td></tr>
+          <tr><td>Put object in drawer</td><td>j₂ (unseen)</td><td>4/10</td><td>7/10</td></tr>
+          <tr><td>Object rearrangement</td><td>j₆ (seen)</td><td>4/10</td><td>8/10</td></tr>
+          <tr class="highlight"><td>Overall</td><td>—</td><td>13/30 (43.3%)</td><td>24/30 (80.0%)</td></tr>
+        </tbody></table></div></div>
+      </section>
+    </main>
+
+    <footer class="footer">CAPABLE · University of Bremen · University of North Texas · Toyota Motor North America</footer>
+  </div>
+</body>
+</html>
